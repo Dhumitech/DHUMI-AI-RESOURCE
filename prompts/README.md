@@ -27,12 +27,26 @@ Use this catalog to select the right prompt pack and understand its output contr
 | `SELF_DISCOVERY.md` | Guided self-discovery assessment. | Personal insight report |
 | `RESOURCES.md` | Prompt learning and reference links. | Resource index |
 
+## Inspired Packs
+
+Use `prompts/inspired/` when you want stronger combined workflows built from the repo's AI engineering, prompt design, product, RAG, and agent skills.
+
+| Prompt | Use Case | Main Output |
+|---|---|---|
+| `inspired/AI_PRODUCT_OS.md` | AI product idea to product, architecture, eval, and launch plan. | AI product operating plan |
+| `inspired/PROMPT_PACK_REFINER.md` | Audit and improve a prompt pack. | Prompt quality report and rewritten prompt |
+| `inspired/AGENT_BLUEPRINT_ARCHITECT.md` | Design a production-ready agent. | Agent blueprint |
+| `inspired/RAG_SYSTEM_ARCHITECT.md` | Design a RAG system. | RAG architecture plan |
+| `inspired/AI_APP_REVIEWER.md` | Review an AI app or AI product artifact. | Risk-ranked review |
+| `inspired/FIRST_PRINCIPLES_AI_TUTOR.md` | Teach AI concepts from first principles. | Lesson and practice exercise |
+
 ## Selection Rules
 
 - Use `PRD.md` or `PRODUCT_MANAGER.md` for product requirements.
 - Use `ARD.md` for AI agents with tools and memory.
 - Use `n8n_CONSULTANT.md` when the implementation target is n8n.
 - Use `TEMPLATE_PROMPT.md` as the base for new prompt packs.
+- Use `prompts/inspired/` for cross-functional AI product, agent, RAG, prompt refinement, and review workflows.
 - Use `PROMPT_PACK_STANDARD.md` from the repo root before modifying prompts.
 
 ## Review Checklist
