@@ -6,6 +6,7 @@
 
 - Contributor guidance for prompt-pack maintenance.
 - Prompt eval cases for product planning, strategy, landing pages, browser automation, and agent workflows.
+- Inspired prompt packs for AI product planning, prompt refinement, agent architecture, RAG architecture, AI app review, and first-principles AI tutoring.
 
 ### Changed
 

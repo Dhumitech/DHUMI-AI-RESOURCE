@@ -5,6 +5,7 @@ Prompt packs, agent planning templates, and AI engineering skills used by Dhumi 
 This repository is organized for practical reuse:
 
 - `prompts/` contains role prompts and reusable prompt templates.
+- `prompts/inspired/` contains higher-order prompt packs synthesized from the repo's AI engineering and prompt design skills.
 - `AI-Engineer-planner-Skills/` contains Codex-style skills for AI product planning, implementation, testing, security, deployment, and documentation.
 - `Agent-Skills/` contains standalone operational skill notes.
 

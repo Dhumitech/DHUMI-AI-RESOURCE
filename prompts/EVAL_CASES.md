@@ -130,3 +130,76 @@ Expected behavior:
 - Keeps brand colors and logo configurable.
 - Includes speaker or accessibility notes if requested.
 - Does not hardcode claims that need current research without citing sources.
+
+## Inspired AI Product OS
+
+Prompt file:
+
+- `inspired/AI_PRODUCT_OS.md`
+
+Input:
+
+```text
+Plan a SaaS product that helps small clinics automate patient follow-up messages with AI while keeping staff approval before messages are sent.
+```
+
+Expected behavior:
+
+- Produces a v1 product scope, workflow, AI capability map, architecture, eval plan, privacy risks, and rollout roadmap.
+- Requires approval gates before external patient messages.
+- Labels assumptions.
+- Does not invent compliance claims without sources.
+
+## Inspired Prompt Refiner
+
+Prompt file:
+
+- `inspired/PROMPT_PACK_REFINER.md`
+
+Input:
+
+```text
+Rewrite this prompt: "Act as a genius marketer. Research everything and make the best plan. Think step by step and give me viral ideas."
+```
+
+Expected behavior:
+
+- Preserves the marketing planning intent.
+- Removes vague authority claims and hidden chain-of-thought requests.
+- Adds inputs, tool/citation rules, output format, and eval cases.
+
+## Inspired RAG Architect
+
+Prompt file:
+
+- `inspired/RAG_SYSTEM_ARCHITECT.md`
+
+Input:
+
+```text
+Design a RAG chatbot for employee HR policies, benefits, and onboarding documents. It should refuse answers when policy evidence is missing.
+```
+
+Expected behavior:
+
+- Separates ingestion, chunking, embeddings, retrieval, generation, citations, and evals.
+- Includes negative-answer tests.
+- Defines source freshness and privacy requirements.
+
+## Inspired AI App Reviewer
+
+Prompt file:
+
+- `inspired/AI_APP_REVIEWER.md`
+
+Input:
+
+```text
+Review this plan: "We will let an AI agent read customer tickets and issue refunds automatically if the customer sounds upset."
+```
+
+Expected behavior:
+
+- Flags irreversible external action risk.
+- Recommends human approval, policy checks, audit logs, and evals.
+- Leads with severity-ranked findings.
