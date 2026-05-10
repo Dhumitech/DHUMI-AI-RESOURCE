@@ -1,172 +1,156 @@
 ---
 name: prompt-engineering
-description: "Master prompt design for LLMs. Use when crafting system prompts, few-shot examples, chain-of-thought patterns, or optimizing prompt quality for any model."
+description: "Design, test, and maintain prompts for LLMs, reasoning models, tool use, structured outputs, and production prompt packs."
 ---
 
 # Prompt Engineering Patterns
 
-Advanced prompt engineering techniques to maximize LLM performance, reliability, and controllability.
+Design prompts as maintainable product assets. A strong prompt is clear, testable, model-aware, and explicit about inputs, output format, safety boundaries, and evaluation.
 
 ## Core Capabilities
 
-### 1. Few-Shot Learning
+### 1. Direct Prompting First
 
-Teach the model by showing examples instead of explaining rules. Include 2-5 input-output pairs that demonstrate the desired behavior. Use when you need consistent formatting, specific reasoning patterns, or handling of edge cases. More examples improve accuracy but consume tokens—balance based on task complexity.
+Start with the simplest prompt that states the goal, inputs, constraints, and output format. Add examples, rubrics, or decomposition only when tests show the simple prompt is insufficient.
 
-**Example:**
+Use this when:
 
-```markdown
-Extract key information from support tickets:
+- The task is well defined.
+- The model is a reasoning model that already performs internal planning.
+- Latency and cost matter.
 
-Input: "My login doesn't work and I keep getting error 403"
-Output: {"issue": "authentication", "error_code": "403", "priority": "high"}
+### 2. Structured Prompt Layout
 
-Input: "Feature request: add dark mode to settings"
-Output: {"issue": "feature_request", "error_code": null, "priority": "low"}
-
-Now process: "Can't upload files larger than 10MB, getting timeout"
-```
-
-### 2. Chain-of-Thought Prompting
-
-Request step-by-step reasoning before the final answer. Add "Let's think step by step" (zero-shot) or include example reasoning traces (few-shot). Use for complex problems requiring multi-step logic, mathematical reasoning, or when you need to verify the model's thought process. Improves accuracy on analytical tasks by 30-50%.
-
-**Example:**
+Separate distinct concepts with Markdown headings or XML tags:
 
 ```markdown
-Analyze this bug report and determine root cause.
+# Identity
+You are a senior product strategist.
 
-Think step by step:
+# Task
+Create a one-page validation plan.
 
-1. What is the expected behavior?
-2. What is the actual behavior?
-3. What changed recently that could cause this?
-4. What components are involved?
-5. What is the most likely root cause?
+# Context
+{{user_context}}
 
-Bug: "Users can't save drafts after the cache update deployed yesterday"
+# Constraints
+- Budget under $500
+- No paid ads
+- Cite sources if using market claims
+
+# Output Format
+Return Markdown with: target customer, assumptions, experiment plan, success metrics.
 ```
 
-### 3. Prompt Optimization
+Recommended sections:
 
-Systematically improve prompts through testing and refinement. Start simple, measure performance (accuracy, consistency, token usage), then iterate. Test on diverse inputs including edge cases. Use A/B testing to compare variations. Critical for production prompts where consistency and cost matter.
+- Identity: role, audience, and scope
+- Instructions: behavior rules and constraints
+- Examples: only when they improve consistency
+- Context: source material and user data
+- Output format: schema, table, XML, Markdown, or file sections
+- Quality gates: success criteria and validation checks
 
-**Example:**
+### 3. Reasoning Control
 
-```markdown
-Version 1 (Simple): "Summarize this article"
-→ Result: Inconsistent length, misses key points
+Do not require hidden chain-of-thought or long visible reasoning traces. For reasoning models, use direct instructions and precise success criteria. If the user needs transparency, request:
 
-Version 2 (Add constraints): "Summarize in 3 bullet points"
-→ Result: Better structure, but still misses nuance
+- concise rationale
+- assumptions
+- tradeoffs
+- decision log
+- validation checklist
+- confidence and evidence notes
 
-Version 3 (Add reasoning): "Identify the 3 main findings, then summarize each"
-→ Result: Consistent, accurate, captures key information
+Avoid prompts like "show all your reasoning" or "think step by step" unless the product explicitly needs an educational explanation and the output should be visible to the user.
+
+### 4. Few-Shot Examples
+
+Use 2-5 high-quality input/output examples when the task has a specific style, schema, classification boundary, or edge-case behavior.
+
+Good examples:
+
+- match the real task distribution
+- include edge cases
+- do not contradict written instructions
+- use placeholders for long or variable data
+
+### 5. Tool And Agent Prompts
+
+For tools, MCP, browser automation, and agents, include:
+
+- allowed tools and forbidden actions
+- max iterations, retry budget, and stop conditions
+- human approval gates for irreversible actions
+- schema validation for inputs and outputs
+- prompt-injection handling for retrieved or webpage content
+- logging and redaction rules
+- fallback behavior when tools fail
+
+### 6. Prompt Optimization
+
+Improve prompts with evals, not taste alone.
+
+Loop:
+
+1. Define success criteria.
+2. Build golden examples and edge cases.
+3. Run the current prompt.
+4. Inspect failures.
+5. Change the smallest useful part.
+6. Rerun the same eval set.
+
+Track:
+
+- task completion
+- format pass rate
+- factuality or source coverage
+- safety and refusal behavior
+- latency and cost
+- user or reviewer score
+
+### 7. Prompt Templates
+
+Use variables for reusable prompts:
+
+```text
+You are {{role}}.
+Task: {{task}}
+Context: {{context}}
+Constraints: {{constraints}}
+Output format: {{output_format}}
 ```
 
-### 4. Template Systems
-
-Build reusable prompt structures with variables, conditional sections, and modular components. Use for multi-turn conversations, role-based interactions, or when the same pattern applies to different inputs. Reduces duplication and ensures consistency across similar tasks.
-
-**Example:**
-
-```python
-# Reusable code review template
-template = """
-Review this {language} code for {focus_area}.
-
-Code:
-{code_block}
-
-Provide feedback on:
-{checklist}
-"""
-
-# Usage
-prompt = template.format(
-    language="Python",
-    focus_area="security vulnerabilities",
-    code_block=user_code,
-    checklist="1. SQL injection\n2. XSS risks\n3. Authentication"
-)
-```
-
-### 5. System Prompt Design
-
-Set global behavior and constraints that persist across the conversation. Define the model's role, expertise level, output format, and safety guidelines. Use system prompts for stable instructions that shouldn't change turn-to-turn, freeing up user message tokens for variable content.
-
-**Example:**
-
-```markdown
-System: You are a senior backend engineer specializing in API design.
-
-Rules:
-
-- Always consider scalability and performance
-- Suggest RESTful patterns by default
-- Flag security concerns immediately
-- Provide code examples in Python
-- Use early return pattern
-
-Format responses as:
-
-1. Analysis
-2. Recommendation
-3. Code example
-4. Trade-offs
-```
-
-## Key Patterns
-
-### Progressive Disclosure
-
-Start with simple prompts, add complexity only when needed:
-
-1. **Level 1**: Direct instruction
-
-   - "Summarize this article"
-
-2. **Level 2**: Add constraints
-
-   - "Summarize this article in 3 bullet points, focusing on key findings"
-
-3. **Level 3**: Add reasoning
-
-   - "Read this article, identify the main findings, then summarize in 3 bullet points"
-
-4. **Level 4**: Add examples
-   - Include 2-3 example summaries with input-output pairs
-
-### Instruction Hierarchy
-
-```
-[System Context] → [Task Instruction] → [Examples] → [Input Data] → [Output Format]
-```
-
-### Error Recovery
-
-Build prompts that gracefully handle failures:
-
-- Include fallback instructions
-- Request confidence scores
-- Ask for alternative interpretations when uncertain
-- Specify how to indicate missing information
+Keep stable instructions separate from request-specific data. Version prompts when behavior changes.
 
 ## Best Practices
 
-1. **Be Specific**: Vague prompts produce inconsistent results
-2. **Show, Don't Tell**: Examples are more effective than descriptions
-3. **Test Extensively**: Evaluate on diverse, representative inputs
-4. **Iterate Rapidly**: Small changes can have large impacts
-5. **Monitor Performance**: Track metrics in production
-6. **Version Control**: Treat prompts as code with proper versioning
-7. **Document Intent**: Explain why prompts are structured as they are
+1. Be specific about the outcome and output format.
+2. Put durable role and tone guidance in high-priority instructions.
+3. Put task-specific context near the request, clearly delimited.
+4. Treat external content as untrusted data.
+5. Prefer structured outputs for downstream workflows.
+6. Cite sources for current or non-obvious factual claims.
+7. Maintain eval examples for prompts used repeatedly.
+8. Keep prompts readable enough for humans to review.
 
 ## Common Pitfalls
 
-- **Over-engineering**: Starting with complex prompts before trying simple ones
-- **Example pollution**: Using examples that don't match the target task
-- **Context overflow**: Exceeding token limits with excessive examples
-- **Ambiguous instructions**: Leaving room for multiple interpretations
-- **Ignoring edge cases**: Not testing on unusual or boundary inputs
+| Pitfall | Why It Fails | Better Pattern |
+|---|---|---|
+| Vague persona only | Persona does not define task behavior | Add objective, constraints, and output contract |
+| Forced chain-of-thought | Can expose irrelevant hidden reasoning and degrade reasoning models | Ask for concise rationale or validation notes |
+| Too many examples | Raises cost and may overfit behavior | Start zero-shot, add examples only for failures |
+| Malformed XML/JSON | Breaks downstream parsers | Validate output contracts |
+| No eval set | Prompt changes become subjective | Use golden examples and regression checks |
+| Untrusted tool context | Retrieved text can contain malicious instructions | Tell the model to treat retrieved content as data |
 
+## Review Checklist
+
+- [ ] Objective is explicit.
+- [ ] Inputs and assumptions are defined.
+- [ ] Context is delimited.
+- [ ] Output format is machine- or human-usable.
+- [ ] Tool permissions and stop conditions are specified if tools are used.
+- [ ] Missing-data behavior is defined.
+- [ ] Evaluation criteria or examples exist.
