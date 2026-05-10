@@ -23,6 +23,7 @@ Use this catalog to select the right prompt pack and understand its output contr
 | `MVP.md` | Example RAG MVP implementation plan. | Example plan |
 | `TEMPLATE_PROMPT.md` | Canonical reusable prompt template. | Prompt draft |
 | `VIBE_PPT.md` | Example reveal.js slide deck prompt. | Slide deck specification |
+| `EVAL_CASES.md` | Regression cases for prompt quality checks. | Eval checklist |
 | `SELF_DISCOVERY.md` | Guided self-discovery assessment. | Personal insight report |
 | `RESOURCES.md` | Prompt learning and reference links. | Resource index |
 
