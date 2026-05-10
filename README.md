@@ -13,7 +13,8 @@ This repository is organized for practical reuse:
 1. Read `PROMPT_AUDIT.md` for the current quality review and improvement priorities.
 2. Use `PROMPT_PACK_STANDARD.md` before adding or editing any prompt.
 3. Browse `prompts/README.md` to select the right prompt pack for a task.
-4. Treat prompts as product assets: version them, test them, and keep assumptions visible.
+4. Run relevant cases from `prompts/EVAL_CASES.md` when changing reusable prompts.
+5. Treat prompts as product assets: version them, test them, and keep assumptions visible.
 
 ## Prompt Quality Baseline
 

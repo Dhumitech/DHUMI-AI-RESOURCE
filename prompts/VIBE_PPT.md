@@ -1,50 +1,60 @@
-Convert this into a web based slide deck using reveal.js.
+# Example Prompt: Reveal.js Vibe Coding Deck
 
-Use the following brand colour and logo.
+This is an example deck-generation prompt. Update the topic, brand assets, and slide content before use.
 
-Primary colour: #2563eb
+## Objective
 
-Theme: Light
+Convert the supplied slide outline into a web-based reveal.js slide deck.
 
-Logo: https://dhumi.com/assets/img/dhumilogo.png
+## Brand Inputs
 
-Slide Content: Vibe Coding with Gemini Canvas
-Slide 1: Vibe Coding with Gemini Canvas
-Slide 2: What is Vibe Coding?
-Vibe Coding: Use natural language prompts for AI code generation.
+- Primary color: `#2563eb`
+- Theme: light
+- Logo: `https://dhumi.com/assets/img/dhumilogo.png`
 
-New Role: Guide AI, test output, refine via conversation (less focus on syntax).
+## Build Rules
 
-Gemini Canvas: Interactive AI workspace enabling this flow.
+- Use reveal.js.
+- Keep the deck readable on projector and laptop screens.
+- Use the brand color for emphasis, not as a full-page background on every slide.
+- Include speaker-friendly slide titles.
+- Keep each slide focused on one idea.
+- Add accessible alt text for logo and meaningful visuals.
+- If using current product claims or market claims, cite sources in speaker notes or a references slide.
 
-Slide 3: Vibe Coding: How & Why
-Process: Prompt -> AI Generates Code -> Test -> Refine.
+## Slide Content
 
-Focus: Intent & Outcome over Syntax & Process.
+1. Vibe Coding with Gemini Canvas
+2. What is Vibe Coding?
+   - Vibe coding uses natural language prompts for AI-assisted code generation.
+   - The builder guides, tests, and refines output through conversation.
+   - Gemini Canvas is an interactive workspace that supports this flow.
+3. Vibe Coding: How And Why
+   - Prompt -> AI generates code -> test -> refine.
+   - Focus on intent and outcome before syntax and process.
+4. Gemini Canvas: The Enabler
+   - Interactive workspace for code and content.
+   - Live preview for fast feedback.
+   - Export and sharing workflow.
+5. Build This Presentation
+   - Topic -> research -> refined document.
+   - Refined document -> personalization -> generated slides.
+6. Take It Further
+   - Slides -> flash cards -> quiz or games.
+   - Slides -> optional Three.js visualization.
+7. Applications
+   - Prototypes, personal tools, learning, websites, slide decks, portfolios.
+   - Useful for non-coders, students, designers, developers, and product teams.
+8. The Path Forward
+   - Use a hybrid approach: AI speed plus human expertise and review.
+   - Clear language is becoming a key interface for software creation.
 
-Slide 4: Gemini Canvas: The Enabler
-Purpose: Interactive AI workspace for code & content.
+## Output Contract
 
-Live Code Preview (Instant feedback)
+Return:
 
-Easy Export & Share
-
-Slide 5: Let’s Vibe code this Presentation
-Step 1: Topic -> Deep Research -> Canvas -> Refined doc
-
-Step 2: Refined Doc -> Add Personalisation -> Generate Slides
-
-Slide 6: Take it to the next level
-Slides -> Flash Cards -> Quiz/Games
-
-Slides -> 3d visualisation using three.js (optional)
-
-Slide 7: Application
-Best For: Prototypes, Personal Tools, Learning, website, slides, portfolio.
-
-Users: Non-coders, Students, Designers, Devs, Product.
-
-Slide 8: The Path Forward
-Hybrid Approach: Blend AI speed + human expertise/review.
-
-English is the new programming language.
+1. File list
+2. Full `index.html`
+3. Any CSS or asset notes
+4. Local preview instructions
+5. Quality checklist
